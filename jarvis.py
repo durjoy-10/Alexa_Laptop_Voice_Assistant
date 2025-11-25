@@ -442,8 +442,32 @@ if __name__ == "__main__":
     if face is None:
         speak("Face verification failed or timed out. Please try again later.")
         sys.exit(1)
+
     f_lock_varified()
-    pas = password()
+
+    # -----------------------------
+    #   New Password Option Added
+    # -----------------------------
+    speak("Press K for keyboard password or V for voice password.")
+    print("Choose password input method:")
+    print("K = Keyboard")
+    print("V = Voice")
+
+    choice = input("Enter your choice (K/V): ").strip().lower()
+
+    if choice == "k":
+        pas = input("Enter your password: ")
+        speak("Keyboard password received.")
+    elif choice == "v":
+        pas = password()   # Calling your existing function
+        speak("Voice password received.")
+    else:
+        speak("Invalid input. Exiting.")
+        print("Invalid choice!")
+        sys.exit(1)
+
+    # Now you can use 'pas' variable normally
+
     if pas == "7747":
         from intro import play_video
         play_video()
